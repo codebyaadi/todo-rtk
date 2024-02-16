@@ -1,0 +1,24 @@
+### Check the server is on
+GET http://localhost:8080
+
+### Add the the data
+POST http://localhost:8080/api/addtodo
+Content-Type: application/json
+
+{
+    "description": "Description of task one in detail"
+}
+
+### Get all the todos
+GET http://localhost:8080/api/gettodos
+
+### Update the todo
+PUT http://localhost:8080/api/updatetodo/65ceff74b00b0a47d22d959d
+Content-Type: application/json
+
+{
+    "completed": false
+}
+
+### Delete todo by id
+DELETE http://localhost:8080/api/deletetodo/65cf03a00177bd2c4178c7cd
