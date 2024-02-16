@@ -37,17 +37,16 @@ export const updateTask = createAsyncThunk(
     }
 );
 
-export const deleteTask = createAsyncThunk(
-    "todos/deleteTask",
-    async (id) => {
-        try {
-            const response = await axios.delete(`http://localhost:8080/api/deletetodo/${id}`);
-            return response.data;
-        } catch (error) {
-            throw error;
-        }
+export const deleteTask = createAsyncThunk("todos/deleteTask", async (id) => {
+    try {
+        const response = await axios.delete(
+            `http://localhost:8080/api/deletetodo/${id}`
+        );
+        return response.data;
+    } catch (error) {
+        throw error;
     }
-)
+});
 
 const todosSlice = createSlice({
     name: "todoslist",
@@ -85,15 +84,27 @@ const todosSlice = createSlice({
             })
             .addCase(updateTask.fulfilled, (state, action) => {
                 state.loading = false;
-                // Update the specific todo in the todos array
                 const updatedTodoIndex = state.todos.findIndex(
-                    (todo) => todo.id === action.payload.id
+                    (todo) => todo._id === action.payload._id
                 );
                 if (updatedTodoIndex !== -1) {
                     state.todos[updatedTodoIndex] = action.payload;
                 }
             })
             .addCase(updateTask.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.error.message;
+            })
+            .addCase(deleteTask.pending, (state) => {
+                state.loading = true;
+            })
+            .addCase(deleteTask.fulfilled, (state, action) => {
+                state.loading = false;
+                state.todos = state.todos.filter(
+                    (todo) => todo._id !== action.payload._id
+                );
+            })
+            .addCase(deleteTask.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.error.message;
             });
