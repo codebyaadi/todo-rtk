@@ -1,10 +1,10 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
+import api from "../api/base";
 
 export const addTask = createAsyncThunk("todos/addTask", async (task) => {
     try {
-        const response = await axios.post(
-            "http://localhost:8080/api/addtodo",
+        const response = await api.post(
+            "/addtodo",
             task
         );
         return response.data;
@@ -15,7 +15,7 @@ export const addTask = createAsyncThunk("todos/addTask", async (task) => {
 
 export const fetchTask = createAsyncThunk("todos/fetchTask", async () => {
     try {
-        const response = await axios.get("http://localhost:8080/api/gettodos");
+        const response = await api.get("/gettodos");
         return response.data;
     } catch (error) {
         throw error;
@@ -26,8 +26,8 @@ export const updateTask = createAsyncThunk(
     "todos/updateTask",
     async ({ id, completed }) => {
         try {
-            const response = await axios.put(
-                `http://localhost:8080/api/updatetodo/${id}`,
+            const response = await api.put(
+                `/updatetodo/${id}`,
                 { completed }
             );
             return response.data;
@@ -39,8 +39,8 @@ export const updateTask = createAsyncThunk(
 
 export const deleteTask = createAsyncThunk("todos/deleteTask", async (id) => {
     try {
-        const response = await axios.delete(
-            `http://localhost:8080/api/deletetodo/${id}`
+        const response = await api.delete(
+            `/deletetodo/${id}`
         );
         return response.data;
     } catch (error) {

@@ -6,7 +6,6 @@ const TodoLister = () => {
   const dispatch = useDispatch();
   const todos = useSelector((state) => state.app.todos);
   const loading = useSelector((state) => state.app.loading);
-  console.log(todos);
 
   const handleCompletionToggle = (id, completed) => {
     dispatch(updateTask({ id, completed: !completed }));
