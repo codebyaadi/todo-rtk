@@ -27,10 +27,10 @@ const AddTask = () => {
       id="task-input"
       className="bg-zinc-700 w-full flex flex-col justify-center items-center py-8 rounded"
     >
-      <div className="flex flex-col gap-2 justify-center items-center">
+      <div className="flex flex-col gap-2 justify-center items-center mx-2">
         <div className="flex flex-row gap-2 justify-center items-center">
           <input
-            className="px-4 py-2 bg-zinc-800 text-white/90 outline-none rounded"
+            className="inline-block w-full px-4 py-2 bg-zinc-800 text-white/90 outline-none rounded"
             type="text"
             name="name"
             id="task-name"
@@ -39,7 +39,7 @@ const AddTask = () => {
             onChange={handleInputChange}
           />
           <input
-            className="px-4 py-2 bg-zinc-800 text-white/90 outline-none rounded"
+            className="inline-block w-full px-4 py-2 bg-zinc-800 text-white/90 outline-none rounded"
             type="text"
             name="description"
             id="task-description"

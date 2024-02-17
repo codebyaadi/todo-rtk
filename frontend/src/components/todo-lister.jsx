@@ -6,6 +6,7 @@ const TodoLister = () => {
   const dispatch = useDispatch();
   const todos = useSelector((state) => state.app.todos);
   const loading = useSelector((state) => state.app.loading);
+  const error = useSelector((state) => state.app.error);
 
   const handleCompletionToggle = (id, completed) => {
     dispatch(updateTask({ id, completed: !completed }));
@@ -19,10 +20,15 @@ const TodoLister = () => {
     dispatch(fetchTask());
   }, [dispatch]);
 
+  if (error) {
+    alert(error);
+    console.log(error);
+  }
+
   return (
     <div
       id="task-input"
-      className="bg-zinc-700 w-full max-h-80 flex flex-col justify-start items-center py-8 mt-2 rounded overflow-y-auto"
+      className="bg-zinc-700 w-full max-h-80 flex flex-col justify-start items-center py-2 md:py-8 mt-2 rounded overflow-y-auto"
     >
       {loading ? (
         <p>Loading...</p>
@@ -34,7 +40,7 @@ const TodoLister = () => {
             .map((todo, index) => (
               <li
                 key={index}
-                className="flex justify-between items-center px-6 py-2 border-b border-white/10 mx-6"
+                className="flex justify-between items-center px-2 md:px-6 py-2 border-b border-white/10 mx-2 md:mx-6"
               >
                 <div>
                   <p className="font-semibold text-white/80">{todo.name}</p>
