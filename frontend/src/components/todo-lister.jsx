@@ -6,7 +6,6 @@ const TodoLister = () => {
   const dispatch = useDispatch();
   const todos = useSelector((state) => state.app.todos);
   const loading = useSelector((state) => state.app.loading);
-  const error = useSelector((state) => state.app.error);
 
   const handleCompletionToggle = (id, completed) => {
     dispatch(updateTask({ id, completed: !completed }));
@@ -19,11 +18,6 @@ const TodoLister = () => {
   useEffect(() => {
     dispatch(fetchTask());
   }, [dispatch]);
-
-  if (error) {
-    alert(error);
-    console.log(error);
-  }
 
   return (
     <div

@@ -1,9 +1,10 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addTask } from "../features/todoSlice";
 
 const AddTask = () => {
   const dispatch = useDispatch();
+  const error = useSelector((state) => state.app.error);
   const [task, setTask] = useState({
     name: "",
     description: "",
@@ -20,6 +21,14 @@ const AddTask = () => {
   const handleAddTask = () => {
     console.log(task);
     dispatch(addTask(task));
+    setTask({
+      name: "",
+      description: "",
+    });
+
+    if (error) {
+      alert(error)
+    }
   }
 
   return (
