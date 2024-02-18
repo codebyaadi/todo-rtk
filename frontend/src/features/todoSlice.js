@@ -9,7 +9,7 @@ export const addTask = createAsyncThunk("todos/addTask", async (task) => {
         );
         return response.data;
     } catch (error) {
-        throw error;
+        throw error.response?.data?.error || error.message;
     }
 });
 
@@ -18,7 +18,7 @@ export const fetchTask = createAsyncThunk("todos/fetchTask", async () => {
         const response = await api.get("/gettodos");
         return response.data;
     } catch (error) {
-        throw error;
+        throw error.response?.data?.error || error.message;
     }
 });
 
@@ -32,7 +32,7 @@ export const updateTask = createAsyncThunk(
             );
             return response.data;
         } catch (error) {
-            throw error;
+            throw error.response?.data?.error || error.message;
         }
     }
 );
@@ -44,7 +44,7 @@ export const deleteTask = createAsyncThunk("todos/deleteTask", async (id) => {
         );
         return response.data;
     } catch (error) {
-        throw error;
+        throw error.response?.data?.error || error.message;
     }
 });
 
